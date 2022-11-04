@@ -1,0 +1,62 @@
+//separacion de request
+###
+POST http://localhost:9000/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Nicolas Ramos",
+  "age": 40,
+  "email": "nikolatesla@email.com"
+}
+###
+POST http://localhost:9000/api/producto HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "papas",
+  "cantidad": 40,
+  "precio": 10
+}
+###
+POST http://localhost:9000/api/admin HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre": "Nicolas Ramos",
+  "direccion": "ambato",
+  "telefono": "099999999",
+  "foto": "no", 
+  "email": "nikolatesla@email.com",
+  "edad": 80,
+  "tipo":"admin",
+  "genero": "masculino",
+  "password": "nicolay"
+}
+###
+POST http://localhost:9000/api/login HTTP/1.1
+Content-Type: application/json
+{
+  "email": "nikolatesla@email.com",
+  "password": "nicolay"
+}
+###
+GET http://localhost:9000/api/admin HTTP/1.1
+
+###
+GET http://localhost:9000/api/reporte HTTP/1.1
+
+###
+GET http://localhost:9000/api/users/6137e2bb2e329eb206b0073e HTTP/1.1
+
+###
+DELETE http://localhost:9000/api/users/6137e1725461c36eba8b2ce4 HTTP/1.1
+
+###
+PUT http://localhost:9000/api/users/6137e2412e329eb206b0073c HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "John Conway",
+  "age": 80,
+  "email": "johnconway@email.com"
+}

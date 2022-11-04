@@ -1,0 +1,13 @@
+{ 
+  "openapi": "3.0.0",
+  "info": { 
+    "version": "1.0.0", 
+    "title": "PYME Backend", 
+    "description": "Api del proyecto PYME Backend", 
+    "licencia": { 
+      "nombre": "MIT", 
+      "url": "http://localhost:8000" 
+    } 
+  }
+  
+}
