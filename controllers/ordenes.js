@@ -1,5 +1,5 @@
 const { response } = require('express');
-const { Producto, Orden } = require('../models');
+const { Producto, Orden, Stock } = require('../models');
 //const { Stock } = require('../models');
 
 
@@ -16,17 +16,32 @@ const crearOrden = async(req, res = response) =>{
             msg: `El producto no se encontro`
         });
     }
-    producto.cantidad -= data.cantidad;
+
+//  Acciones para modificar el stock de productos
+    let valor = data.cantidad
+    valor = parseInt(valor)
+
+    if(data.operacion === "Ingreso") producto.cantidad =+ valor
+    else if(data.operacion === "Salida") producto.cantidad === 0 ? res.json(msg = 'No hay producto') : producto.cantidad -= valor
+    
+    //producto.cantidad -= data.cantidad;
     await producto.save();
     res.json(msg ="ok")
 
+    const productoAfter = await Producto.findById(data.id);
+    let newValue = productoAfter.cantidad
 
-    data.producto = req.usuario.cantidad;
 
-    const productoActual = await Orden.findByIdAndUpdate(cantidad, { new: true });
-    if ( productoActual) {
-    res.json (msg = "okey")
-}
+    //const stock = await Stock
+    
+  //  await 
+
+//     data.producto = req.usuario.cantidad;
+
+//     const productoActual = await Orden.findByIdAndUpdate(data.cantidad, { new: true });
+//     if ( productoActual) {
+//     res.json (msg = "okey")
+// }
 };
 
 module.exports = {

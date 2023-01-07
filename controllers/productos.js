@@ -1,6 +1,6 @@
 const { response } = require('express');
-const { Producto } = require('../models');
-const { Stock } = require('../models');
+const { Producto,Stock } = require('../models');
+
 
 
 const obtenerProductos = async(req, res = response ) => {
@@ -27,8 +27,8 @@ const obtenerProducto = async(req, res = response ) => {
 
     const { id } = req.params;
     const producto = await Producto.findById( id )
-                            .populate('usuario', 'nombre')
-                            .populate('categoria', 'nombre');
+                                   .populate('usuario', 'nombre')
+                                   .populate('categoria', 'nombre');
 
     res.json( producto );
 
@@ -38,7 +38,8 @@ const crearProducto = async(req, res = response ) => {
 
     const { estado, usuario, ...body } = req.body;
 
-    const productoDB = await Producto.findOne({ nombre: body.nombre });
+    const productoDB = await Producto.findOne({ nombre: body.nombre })
+    
 
     if ( productoDB ) {
         return res.status(400).json({
@@ -46,7 +47,7 @@ const crearProducto = async(req, res = response ) => {
         });
     }
 
-    // Generar la data a guardar
+    // Generando los datos a guardar
     const data = {
         ...body,
         nombre: body.nombre.toUpperCase(),
@@ -54,18 +55,16 @@ const crearProducto = async(req, res = response ) => {
     }
 
     const producto = new Producto( data );
-
-
-    const stock = new Stock(data);
     // Guardar DB
     await producto.save();
+    res.status(201).json(producto);
 
     //crear nuevo squema stok
     //generar datos de la tabla stok
     //guardar en la collecccion stok
-    //await stock.save();
-
-    res.status(201).json(producto);
+    
+    const stock = new Stock(data);
+    await stock.save();
     //res.status(201).json(stock);
 
 }
@@ -80,6 +79,7 @@ const actualizarProducto = async( req, res = response ) => {
     }
 
     data.usuario = req.usuario._id;
+     consn
 
     const producto = await Producto.findByIdAndUpdate(id, data, { new: true });
 //

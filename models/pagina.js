@@ -1,85 +1,116 @@
-
 const { Schema, model } = require('mongoose');
 
-const PaginaSchema = Schema({
-  header: {
+const PaginaSchema = Schema(
+  {
     title:{
-      type: String,
-      required: [true, 'El titulo es obligatorio'],
-    },
+              type: String,
+              //required: [true, 'El titulo es obligatorio'],
+          },
+          estado: {
+            type: Boolean,
+            default: true,
+            required: true
+        },
     logo:{
-      type: String,
-      required: [true, 'El logo es obligatorio'],
-    },
-    img:{
-      type: String},
-
+              type: String,
+          },
+    imgTitle:{
+              type: String,
+          },
     about:{
-      type: String
-    },
+              type: String,
+          },
     contactos:{
-      type: String
-    },
-    },
-  body: {
-    img:{
-      type: String,
-    },
-    descripcion: {
-      type: String,
-      required: true
-    }
-    
-  },
-  footer: {
-    descripcion: {
-      type: String,
-      require: true,
-    },
+              type: String,
+          },
+    imgBody:{
+              type: String,
+          },
+    descripcionBody: {
+              type: String,
+              //required: true
+          },
+    descripcionFooter: {
+              type: String,
+              //require: true,
+          },
     contactos: {
-      type: String,
-      require: true,
-    }
-  },
-  redes: {
-    type: String,
-    required: true
-  },
-  
-});
+              type: String,
+              //require: true,
+          },
+    redes: {
+              type: String,
+              // required: true
+          },
+}
+);
 
-module.exports = model('Pagina', PaginaSchema);
+module.exports = model( 'Pagina', PaginaSchema );
 
 /*
-const mongoose = require("mongoose");
+const { Schema, model } = require('mongoose');
 
-const paginaSchema = mongoose.Schema({
+const PaginaSchema = Schema(
+  {
   header: {
     title:String,
     logo:String,
     img:String,
     about:String,
-    contactos:String,
- 
   },
   body: {
     img: String,
-  
     descripcion: String,
-
   },
   footer: {
     descripcion: String,
-
     contactos: String,
-
   },
   redes: {
     tipo: String,
-
   },
   
 });
 
-module.exports = mongoose.model('Pagina', paginaSchema);
+
+module.exports = model( 'Pagina', PaginaSchema );
+*/
+
+/*
+{
+    title:{
+              type: String,
+              //required: [true, 'El titulo es obligatorio'],
+          },
+    logo:{
+              type: String,
+          },
+    imgTitle:{
+              type: String
+          },
+    about:{
+              type: String
+          },
+    contactos:{
+              type: String
+    imgBody:{
+              type: String,
+          },
+    descripcionBody: {
+              type: String,
+              //required: true
+          },
+    descripcionFooter: {
+              type: String,
+              //require: true,
+          },
+    contactos: {
+              type: String,
+              //require: true,
+    }
+    redes: {
+              type: String,
+              // required: true
+            },
+}
 */
