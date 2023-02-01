@@ -1,10 +1,38 @@
-const express = require("express");
-//const adminSchema = require("../models/admin");
-const noti = require("../controllers/notificacion.js");
-const router = express.Router();
+const { Router } = require('express');
+const { check } = require('express-validator');
 
-// create admin
-router.get("/admin",noti.noti);
 
+const { validarJWT, 
+        validarCampos, 
+        tieneRole, 
+        esAdminRole } = require('../middlewares');
+
+
+//const { login,register, logout, decoded } = require('../controllers/auth');
+const { crearNotificacion, 
+        obtenerNotificacion, 
+        actualizarNotificacion, 
+        borrarNotificacion, 
+        filtroNoti} = require('../controllers/notificaciones');
+
+const router = Router();
+
+router.get('/',[
+    validarJWT,
+    tieneRole('ADMIN_ROLE','USER_ROLE', 'USER_BRANCH_ROLE')
+], obtenerNotificacion );
+
+router.post('/',[
+    validarJWT,
+    tieneRole('ADMIN_ROLE','USER_BRANCH_ROLE'),
+], crearNotificacion );
+
+router.put("/:id",actualizarNotificacion );
+
+router.delete('/:id',borrarNotificacion);
+
+router.patch('/',[
+    validarJWT,
+], filtroNoti)
 
 module.exports = router;

@@ -21,6 +21,8 @@ class Server {
             stock:    '/api/stock',
             uploads:    '/api/uploads',
             ordenes :   '/api/ordenes',
+            reporte :   '/api/reporte',
+            notificaciones :   '/api/notificaciones',
         }
 
 
@@ -71,18 +73,17 @@ class Server {
         this.app.use( this.paths.stock, require('../routes/stock'));
         this.app.use( this.paths.ordenes, require('../routes/ordenes'));
         this.app.use( this.paths.uploads, require('../routes/uploads'));
+        this.app.use( this.paths.reporte, require('../routes/reporte'));
+        this.app.use( this.paths.notificaciones, require('../routes/notificaciones'));
         
     }
 
     listen() {
         this.app.listen( this.port, () => {
-            console.log('Servidor corriendo en puerto', this.port );
+        console.log('Servidor corriendo en puerto', this.port );
         });
     }
 
 }
 
-
-
-
-module.exports = Server;
+module.exports = Server

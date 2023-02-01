@@ -28,7 +28,8 @@ const ProductoSchema = Schema({
     },
     cantidad: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     descripcion: { type: String },
     disponible: { type: Boolean, defult: true },

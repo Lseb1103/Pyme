@@ -6,7 +6,7 @@ const PaginaSchema = Schema(
               type: String,
               //required: [true, 'El titulo es obligatorio'],
           },
-          estado: {
+    estado:{
             type: Boolean,
             default: true,
             required: true

@@ -2,57 +2,52 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-/*
-const { validarCampos } = require('../middlewares/validar-campos');
-const { validarJWT } = require('../middlewares/validar-jwt');
-const { esAdminRole, tieneRole } = require('../middlewares/validar-roles');
-*/
 const {
     validarCampos,
     validarJWT,
-    esAdminRole,
-    tieneRole
+    esAdminRole, 
+    tieneRole} = require('../middlewares');
 
-}=require('../middlewares');
-const { esRoleValido, emailExiste, existeUsuarioPorId } = require('../helpers/db-validators');
+const { esRoleValido,
+        emailExiste, 
+        existeUsuarioPorId } = require('../helpers/db-validators');
 
 const { usuariosGet,
         usuariosPut,
         usuariosPost,
-        usuariosDelete} = require('../controllers/usuarios');
-
-
+        usuariosDelete } = require('../controllers/usuarios');
 
 const router = Router();
-
  
-router.get('/',[],
-    validarJWT,
-    esAdminRole, usuariosGet );
+router.get('/',[
+    //validarJWT,
+    //esAdminRole, 
+], usuariosGet );
 
 router.put('/:id',[
     validarJWT,
-    esAdminRole, 
+    //esAdminRole,
+    tieneRole('ADMIN_ROLE','USER_ROLE', 'USER_BRANCH_ROLE'), 
     check('id', 'No es un ID válido').isMongoId(),//
     check('id').custom( existeUsuarioPorId ),
     check('rol').custom( esRoleValido ), 
-    validarCampos
+    //validarCampos
 ],usuariosPut );
 
 router.post('/',[
+    validarJWT, 
+    esAdminRole,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('password', 'El password debe de ser más de 6 letras').isLength({ min: 6 }),
     check('correo', 'El correo no es válido').isEmail(),
     check('correo').custom( emailExiste ),
-    // check('rol', 'No es un rol válido').isIn(['ADMIN_ROLE','USER_ROLE']),
     check('rol').custom( esRoleValido ), 
     validarCampos
 ], usuariosPost );
 
 router.delete('/:id',[
     validarJWT,
-    esAdminRole, //FUERZA A QUE SEHA UN ADMISTRADOR 
-    //tieneRole('USER_ROLE','USER_BRANCH_ROLE '),
+    esAdminRole, 
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom( existeUsuarioPorId ),
     validarCampos

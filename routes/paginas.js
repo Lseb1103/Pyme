@@ -1,59 +1,61 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { obtenerPaginas,
-        obtenerPagina,
-        actualizarPagina,
-        crearPagina,
-        borrarPagina } = require('../controllers/paginas');
+const { postPage,
+        getAllPages,
+        getPage,
+        deletePage,
+        putPage } = require('../controllers/paginas');
         
-const { esRoleValido,
-         emailExiste, 
-         existeUsuarioPorId,
-         existePaginaPorId} = require('../helpers/db-validators');
-const {
-    validarCampos,
+const { existeUsuarioPorId,
+        existePaginaPorId } = require('../helpers/db-validators');
+
+    const { validarCampos,
+            validarJWT,
+            esAdminRole } = require('../middlewares');
+
+const router = Router();
+
+// create page
+
+router.post("/paginas",[
     validarJWT,
     esAdminRole,
-    tieneRole} =require('../middlewares');
+    check('title','El titulo el obligaatorio').not().isEmpty(),
+    validarCampos
+], postPage);
 
-    const router = Router();
-
-    // create page
-
-    router.post("/paginas",[
-        //tieneRole('USER_ADMIN','USER_ROLE','USER_BRANCH_ROLE '),
-        check('titulo','El titulo el obligaatorio').not().isEmpty(),
-        validarCampos
-    ], crearPagina);
-
-    // Obtener todas las paginas - publico
+// Obtener todas las paginas - publico
     
-    router.get('/', obtenerPaginas);
+router.get('/',[
+    validarJWT, 
+    esAdminRole
+], getAllPages);
 
-    // Obtener una pagina por id - publico
+// Obtener una pagina por id - publico
 
-    router.get('/',[
-        check('id', 'No es un id de Mongo válido').isMongoId(),
-        check('id').custom(existePaginaPorId),
-        validarCampos,
-        //tieneRole('USER_ADMIN','USER_ROLE','USER_BRANCH_ROLE '),
-    ], obtenerPagina);
+router.get('/:id',[
+    validarJWT,
+    esAdminRole,
+    check('id', 'No es un id de Mongo válido').isMongoId(),
+    check('id').custom(existePaginaPorId),
+    validarCampos
+], getPage);
 
     // delete page
-    router.delete('/paginas/:id',[
-        validarJWT,
-        //tieneRole('USER_ADMIN','USER_ROLE','USER_BRANCH_ROLE '),
-        check('id', 'No es un id de Mongo válido').isMongoId(),
-        check('id').custom(existeUsuarioPorId),
-    ], borrarPagina);
+router.delete('/:id',[
+    validarJWT,
+    esAdminRole,
+    check('id', 'No es un id de Mongo válido').isMongoId(),
+    check('id').custom(existeUsuarioPorId),
+], deletePage);
 
     // update page
-    router.put('/paginas/:id',[
-        validarJWT,
-        //tieneRole('USER_ADMIN','USER_ROLE','USER_BRANCH_ROLE '),
-        check('id').custom(existePaginaPorId),    
-        validarCampos
-    ], actualizarPagina);
+router.put('/:id',[
+    validarJWT,
+    esAdminRole,
+    check('id').custom(existePaginaPorId),    
+    validarCampos
+], putPage);
 
-    module.exports = router;
+module.exports = router;

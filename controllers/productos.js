@@ -38,9 +38,8 @@ const crearProducto = async(req, res = response ) => {
 
     const { estado, usuario, ...body } = req.body;
 
-    const productoDB = await Producto.findOne({ nombre: body.nombre })
-    
-
+    const productoDB = await Producto.findOne({ nombre: body.nombre.toUpperCase()})
+    console.log('hii',productoDB)
     if ( productoDB ) {
         return res.status(400).json({
             msg: `El producto ${ productoDB.nombre }, ya existe`
@@ -79,14 +78,15 @@ const actualizarProducto = async( req, res = response ) => {
     }
 
     data.usuario = req.usuario._id;
-     consn
 
     const producto = await Producto.findByIdAndUpdate(id, data, { new: true });
 //
     const stock = await Stock.findByIdAndUpdate(id, data, { new: true }); 
-//
+    
+    await stock.save();
     res.json( producto );
-    res.json( stock );
+    
+    //res.json( stock );
 
 }
 
@@ -96,11 +96,24 @@ const borrarProducto = async(req, res = response ) => {
     const productoBorrado = await Producto.findByIdAndUpdate( id, { estado: false }, {new: true });
 ///
     const stockBorrado = await Stock.findByIdAndUpdate( id, { estado: false }, {new: true });
+    await stockBorrado.save();
 ///
     res.json( productoBorrado );
-    res.json( stockBorrado);
+    //res.json( stockBorrado);
 }
 
+
+const obtenercategoria = async(req, res = response ) => {
+    //const cat ={ msg : 'hi'}
+    const { categoria } = req.query;
+    const cat = await Producto.find({categoria: { $eq: categoria},
+    })
+                                   .populate('usuario', 'nombre')
+                                   .populate('categoria', 'nombre');
+
+    res.json( cat );
+
+}
 
 
 module.exports = {
@@ -108,5 +121,6 @@ module.exports = {
     obtenerProductos,
     obtenerProducto,
     actualizarProducto,
-    borrarProducto
+    borrarProducto,
+    obtenercategoria
 }

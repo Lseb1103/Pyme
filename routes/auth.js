@@ -1,13 +1,10 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-
-
 const { validarCampos } = require('../middlewares/validar-campos');
 
-
-const { login, googleSignin, register, logout, decoded } = require('../controllers/auth');
-
+const { login,
+        logout } = require('../controllers/auth');
 
 const router = Router();
 
@@ -17,8 +14,7 @@ router.post('/login',[
     validarCampos
 ],login );
 
-/*router.post("/register", register);
-*/
+//router.post("/register", register);
 //router.put("/logout", logout);
 router.post('/logout',logout);
 

@@ -2,9 +2,8 @@ const { Schema, model } = require('mongoose');
 
 const OrdenSchema = Schema({
    
-    estado: {
-        type: Boolean,
-        default: true,
+    operacion: {
+        type: String,
         required: true
     },
     usuario: {
@@ -20,6 +19,18 @@ const OrdenSchema = Schema({
     },
 
     cantidad: {
+        type: Number,
+        required: true
+    },
+ //   productoNombre: {
+//        type: String,
+ //       required: true
+   // },
+    sucursal: {
+        type: String,
+        required: [true, 'El celular es obligatorio'],
+    },
+    cantidadFinalProducto:{
         type: Number,
         required: true
     }

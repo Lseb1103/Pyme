@@ -1,11 +1,18 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { validarJWT, validarCampos, esAdminRole,tieneRole } = require('../middlewares');
+const { validarJWT, 
+        validarCampos, 
+        esAdminRole,
+        tieneRole, 
+        validateOrder } = require('../middlewares');
 
-const { crearOrden,} = require('../controllers/ordenes');
+const { crearOrden, 
+        obtenerOrdenesSalida, 
+        obtenerOrdenesIngreso } = require('../controllers/ordenes');
 
-const { existeCategoriaPorId, existeProductoPorId } = require('../helpers/db-validators');
+const { existeCategoriaPorId, 
+        existeProductoPorId, } = require('../helpers');
 
 const router = Router();
 
@@ -16,17 +23,18 @@ const router = Router();
 // Crear orden 
 router.post('/',[
     validarJWT,
-    esAdminRole,
-    check('id', 'No es un id de Mongo válido').isMongoId(),
-    check('id').custom( existeProductoPorId ),                                          
-],crearOrden)
-/*
-router.put('/:id',[
-  validarJWT,
-  esAdminRole,
-  check('id', 'No es un id de Mongo válido').isMongoId(),
-  check('id').custom( existeProductoPorId ),                                          
-],actualiazarOrden)*/
+    tieneRole('USER_ROLE', 'USER_BRANCH_ROLE', ),
+    //esAdminRole,
 
+    //validateOrder,
+    check('sucursal','La sucursal es obligatoria').not().isEmpty(),
+    //check('categoria','No es un id de Mongo').isMongoId(),
+    //check('categoria').custom( existeCategoriaPorId ),
+    validarCampos
+
+], crearOrden);
+
+router.get('/salida', obtenerOrdenesSalida);
+router.get('/ingreso', obtenerOrdenesIngreso)
 
 module.exports = router;

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 
-
 const dbConnection = async() => {
 
     try {
@@ -12,12 +11,12 @@ const dbConnection = async() => {
             useCreateIndex: true,
             useFindAndModify: false
         });
-    
+        //+process.argv[2] && require('./fake')();///faker
         console.log('Base de datos online');
 
     } catch (error) {
         console.log(error);
-        throw new Error('Error a la hora de iniciar la base de datos');
+        throw new Error('Error a la hora de iniciar la base de datos: ',error);
     }
 
 
