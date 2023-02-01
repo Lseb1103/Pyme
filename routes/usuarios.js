@@ -20,18 +20,18 @@ const { usuariosGet,
 const router = Router();
  
 router.get('/',[
-    //validarJWT,
-    //esAdminRole, 
+    validarJWT,
+    esAdminRole, 
 ], usuariosGet );
 
 router.put('/:id',[
     validarJWT,
-    //esAdminRole,
+    esAdminRole,
     tieneRole('ADMIN_ROLE','USER_ROLE', 'USER_BRANCH_ROLE'), 
     check('id', 'No es un ID válido').isMongoId(),//
     check('id').custom( existeUsuarioPorId ),
     check('rol').custom( esRoleValido ), 
-    //validarCampos
+    validarCampos
 ],usuariosPut );
 
 router.post('/',[
