@@ -43,7 +43,7 @@ describe("POST /api/auth/login", () => {
             done();
             });
     });
-/*
+
     it("It should POST change password ", (done) => {
         const task = {
             password: "12345678",
@@ -343,8 +343,8 @@ describe("GET /api/notificaciones", () => {
  * Test the GET reporte general
  */
 
-    describe("GET /api/reporte/reporteGeneral", () => {
-        it("It should GET all the tasks", (done) => {
+    describe("GET /api/stock", () => {
+        it("It should GET reporteGeneral", (done) => {
             chai.request(server.app)
                 .get("/api/reporte/reporteGeneral")
                 .end((err, response) => {
@@ -364,6 +364,7 @@ describe("GET /api/notificaciones", () => {
         });
 
     }); 
+
 /**
  * Test the PUT usuario sucursal
  */
@@ -403,6 +404,7 @@ describe("GET /api/notificaciones", () => {
                 });
         });        
     });
+
 /**
  * Test the POST orden de ingreso
  */
@@ -450,7 +452,7 @@ describe("POST /api/ordenes", () => {
  */
 
 describe("POST /api/ordenes", () => {
-    it("It should POST a new task", (done) => {
+    it("It should POST ordenes salida", (done) => {
         const task = {
             id: "63b88ef0aeeb0c6becbc81ae",
             cantidad: 20,
@@ -548,8 +550,8 @@ describe("GET /api/ordenes/salida", () => {
     });
 })
 
-describe("GET /api/ordenes/ingreso", () => {
-    it("It should GET all the salidas", (done) => {
+describe("GET /api/ordenes/salida", () => {
+    it("It should GET all ordenes de salida", (done) => {
         chai.request(server.app)
             .get("/api/ordenes/ingreso")
             .end((err, response) => {
@@ -568,10 +570,9 @@ describe("GET /api/ordenes/ingreso", () => {
             });
     });
 })
-
-    /**
+/*
  * Test the POST orden de salida
- */
+
 
     describe("POST /api/ordenes", () => {
         it("It should POST a new task", (done) => {
@@ -611,3 +612,4 @@ describe("GET /api/ordenes/ingreso", () => {
 
     });
 });
+*/

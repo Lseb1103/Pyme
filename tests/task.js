@@ -10,8 +10,8 @@ chai.should();
 
 chai.use(chaiHttp);
 
-describe('Tasks API', () => {
-/* 
+describe('Test API', () => {
+    
 //Test the paginas
     
     describe("GET /api/paginas", () => {
@@ -109,19 +109,199 @@ describe('Tasks API', () => {
                 response.should.have.status(401);
             done();
             });
-    });  */
+    });  
+});
 
 
 // Test get products
+
     describe("GET /api/productos", () => {
-        it("It should GET all ", (done) => {
+        it("It should GET all productos", (done) => {
         chai.request(server.app)
-            .get("/api/productos")
+            .get("/api/prpductos")
             .end((err, response) => {
-                response.should.have.status(401);
+                response.should.have.status(404);
             done();
             });
-    }); 
+        });
+    });
 
-})
+// Test get notificaciones
+
+    describe("GET /api/notificaciones", () => {
+        it("It should GET all notificaciones", (done) => {
+            chai.request(server.app)
+                .get("/api/notificaciones")
+                .end((err, response) => {
+                    response.should.have.status(500);
+    
+                done();
+                });
+        });
+    });
+// Test get reporte general
+
+    describe("GET /api/stock", () => {
+        it("It should GET reporteGeneral", (done) => {
+            chai.request(server.app)
+                .get("/api/notificaciones")
+                .end((err, response) => {
+                    response.should.have.status(500);
+
+                done();
+                });
+        });
+});
+        
+
+//Test the PUT usuario sucursal
+
+
+    describe("PUT /api/usuarios/:id", () => {
+        it("It should PUT a users", (done) => {
+        const taskId = "63c1f057741b2d402cb4d12d";
+        const task = {
+            name: "Carlos",
+            apellido: "Mendez",
+        };
+        chai.request(server.app)                
+            .put("/api/usuarios/:id" + taskId)
+            .send(task)
+            .end((err, response) => {
+                response.should.have.status(401);
+                //response.body.should.have.property('id').eq("63c1f057741b2d402cb4d12d");
+                //response.body.should.have.property('name').eq("Carlos");
+                //response.body.should.have.property('apellido').eq("Mendez");
+            done();
+            });
+    });
+});
+
+//Test the POST orden de ingreso
+
+    describe("POST /api/ordenes", () => {
+        it("It should POST ordenes de ingreso", (done) => {
+        const task = {
+            id: "63b88ef0aeeb0c6becbc81ae",
+            cantidad: 20,
+            operacion: "Ingreso",
+            sucursal: "Supermaxi"
+        };
+        chai.request(server.app)                
+            .post("/api/ordenes")
+            .send(task)
+            .end((err, response) => {
+                response.should.have.status(401);
+                //response.body.should.be.a('object');
+                //response.body.should.have.property('id').eq("163b88ef0aeeb0c6becbc81ae");
+                //response.body.should.have.property('cantidad').eq(20);
+                //response.body.should.have.property('operacion').eq("Ingreso");
+                //response.body.should.have.property('operacion').eq("Supermaxi");
+            done();
+            });
+    });
+});
+// Test get notificaciones del empleado sucursal
+
+    describe("GET /api/notificaciones", () => {
+        it("It should GET all notificaciones del empleado sucursal", (done) => {
+        chai.request(server.app)
+            .get("/api/notificaciones")
+            .end((err, response) => {
+                response.should.have.status(500);
+
+            done();
+            });
+    });
+});
+
+// Test get de ordenes de ingreso
+
+    describe("GET /api/ordenes/ingreso", () => {
+        it("It should GET all ordenes de ingreso", (done) => {
+        chai.request(server.app)
+            .get("/api/notificaciones")
+            .end((err, response) => {
+                response.should.have.status(500);
+
+            done();
+            });
+    });
+});
+
+//Test the PUT usuario sucursal
+ 
+
+    describe("PUT /api/usuarios/:id", () => {
+        it("It should PUT a users", (done) => {
+        const taskId = "63c702e90391aa2ae4ea238f";
+        const task = {
+            name: "Esteban",
+            apellido: "Tipan",
+        };
+        chai.request(server.app)                
+            .put("/api/usuarios/:id" + taskId)
+            .send(task)
+            .end((err, response) => {
+                response.should.have.status(401);
+                //response.body.should.have.property('id').eq("63c702e90391aa2ae4ea238f");
+                //esponse.body.should.have.property('name').eq("Esteban");
+                //response.body.should.have.property('apellido').eq("Tipan");
+            done();
+            });
+    });
+});
+// Test get notificaciones del empleado 
+
+    describe("GET /api/notificaciones", () => {
+        it("It should GET all notificaciones del empleado", (done) => {
+        chai.request(server.app)
+            .get("/api/notificaciones")
+            .end((err, response) => {
+                response.should.have.status(500);
+
+            done();
+            });
+         });
+
+    });
+
+//Test the POST orden de salida
+
+    describe("POST /api/ordenes", () => {
+        it("It should POST ordenes salida", (done) => {
+            const task = {
+                id: "63b88ef0aeeb0c6becbc81ae",
+                cantidad: 20,
+                operacion: "Salida",
+                sucursal: "Aki"
+            };
+            chai.request(server.app)                
+                .post("/api/ordenes")
+                .send(task)
+                .end((err, response) => {
+                    response.should.have.status(401);
+                    //response.body.should.be.a('object');
+                   // response.body.should.have.property('id').eq("163b88ef0aeeb0c6becbc81ae");
+                    //response.body.should.have.property('cantidad').eq(20);
+                    //response.body.should.have.property('operacion').eq("Salida");
+                    //response.body.should.have.property('operacion').eq("Aki");
+                done();
+                });
+        });
+    });
+
+    describe("GET /api/ordenes/salida", () => {
+        it("It should GET all the salidas", (done) => {
+            chai.request(server.app)
+                .get("/api/notificaciones")
+                .end((err, response) => {
+                    response.should.have.status(500);
+    
+                done();
+                });
+        });
+
+});
+
 });

@@ -23,6 +23,7 @@ const router = Router();
 // Crear orden 
 router.post('/',[
     validarJWT,
+    validateOrder,
     tieneRole('USER_ROLE', 'USER_BRANCH_ROLE', ),
     //esAdminRole,
 
