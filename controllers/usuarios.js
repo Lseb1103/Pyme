@@ -3,7 +3,7 @@ const bcryptjs = require('bcryptjs');
 
 
 const Usuario = require('../models/usuario');
-const validations = require("../validators/auth");
+
 
 
 
