@@ -19,7 +19,7 @@ describe('Test API', () => {
             chai.request(server.app)
                 .get("/api/paginas")
                 .end((err, response) => {
-                    response.should.have.status(401);
+                    response.should.have.status(200);
                 done();
                 });
         });
@@ -45,13 +45,13 @@ describe('Test API', () => {
         };
         chai.request(server.app)                
             .post("/api/auth/login")
-            //.send(task)
+            .send(task)
             .end((err, response) => {
-                response.should.have.status(400);
-                //response.body.should.be.a('object');
-                //response.body.should.have.property('id').eq("63c1eb42d4c0de3b0cb26ae2");
-                //response.body.should.have.property('correo').eq("lc@email.com");
-                //response.body.should.have.property('password').eq(12345678);
+                response.should.have.status(201);
+                response.body.should.be.a('object');
+                response.body.should.have.property('id').eq("63c1eb42d4c0de3b0cb26ae2");
+                response.body.should.have.property('correo').eq("lc@email.com");
+                response.body.should.have.property('password').eq(12345678);
             done();
             });
     });
@@ -106,7 +106,7 @@ describe('Test API', () => {
         chai.request(server.app)                
             .delete("/api/usuarios/:id" + taskId)
             .end((err, response) => {
-                response.should.have.status(401);
+                response.should.have.status(202);
             done();
             });
     });  
@@ -118,9 +118,9 @@ describe('Test API', () => {
     describe("GET /api/productos", () => {
         it("It should GET all productos", (done) => {
         chai.request(server.app)
-            .get("/api/prpductos")
+            .get("/api/productos")
             .end((err, response) => {
-                response.should.have.status(404);
+                response.should.have.status(200);
             done();
             });
         });
@@ -133,7 +133,7 @@ describe('Test API', () => {
             chai.request(server.app)
                 .get("/api/notificaciones")
                 .end((err, response) => {
-                    response.should.have.status(500);
+                    response.should.have.status(200);
     
                 done();
                 });
@@ -146,7 +146,7 @@ describe('Test API', () => {
             chai.request(server.app)
                 .get("/api/notificaciones")
                 .end((err, response) => {
-                    response.should.have.status(500);
+                    response.should.have.status(200);
 
                 done();
                 });
@@ -191,12 +191,12 @@ describe('Test API', () => {
             .post("/api/ordenes")
             .send(task)
             .end((err, response) => {
-                response.should.have.status(401);
-                //response.body.should.be.a('object');
-                //response.body.should.have.property('id').eq("163b88ef0aeeb0c6becbc81ae");
-                //response.body.should.have.property('cantidad').eq(20);
-                //response.body.should.have.property('operacion').eq("Ingreso");
-                //response.body.should.have.property('operacion').eq("Supermaxi");
+                response.should.have.status(500);
+                response.body.should.be.a('object');
+                response.body.should.have.property('id').eq("163b88ef0aeeb0c6becbc81ae");
+                response.body.should.have.property('cantidad').eq(20);
+                response.body.should.have.property('operacion').eq("Ingreso");
+                response.body.should.have.property('sucursal').eq("Supermaxi");
             done();
             });
     });
@@ -208,7 +208,7 @@ describe('Test API', () => {
         chai.request(server.app)
             .get("/api/notificaciones")
             .end((err, response) => {
-                response.should.have.status(500);
+                response.should.have.status(200);
 
             done();
             });
@@ -222,15 +222,15 @@ describe('Test API', () => {
         chai.request(server.app)
             .get("/api/notificaciones")
             .end((err, response) => {
-                response.should.have.status(500);
+                response.should.have.status(200);
 
             done();
             });
     });
 });
 
-//Test the PUT usuario sucursal
- 
+
+//Test the PUT usuario empleado
 
     describe("PUT /api/usuarios/:id", () => {
         it("It should PUT a users", (done) => {
@@ -243,10 +243,10 @@ describe('Test API', () => {
             .put("/api/usuarios/:id" + taskId)
             .send(task)
             .end((err, response) => {
-                response.should.have.status(401);
-                //response.body.should.have.property('id').eq("63c702e90391aa2ae4ea238f");
-                //esponse.body.should.have.property('name').eq("Esteban");
-                //response.body.should.have.property('apellido').eq("Tipan");
+                response.should.have.status(200);
+                response.body.should.have.property('id').eq("63c702e90391aa2ae4ea238f");
+                esponse.body.should.have.property('name').eq("Esteban");
+                response.body.should.have.property('apellido').eq("Tipan");
             done();
             });
     });
@@ -258,7 +258,7 @@ describe('Test API', () => {
         chai.request(server.app)
             .get("/api/notificaciones")
             .end((err, response) => {
-                response.should.have.status(500);
+                response.should.have.status(200);
 
             done();
             });
@@ -281,11 +281,11 @@ describe('Test API', () => {
                 .send(task)
                 .end((err, response) => {
                     response.should.have.status(401);
-                    //response.body.should.be.a('object');
-                   // response.body.should.have.property('id').eq("163b88ef0aeeb0c6becbc81ae");
-                    //response.body.should.have.property('cantidad').eq(20);
-                    //response.body.should.have.property('operacion').eq("Salida");
-                    //response.body.should.have.property('operacion').eq("Aki");
+                    response.body.should.be.a('object');
+                    response.body.should.have.property('id').eq("163b88ef0aeeb0c6becbc81ae");
+                    response.body.should.have.property('cantidad').eq(20);
+                    response.body.should.have.property('operacion').eq("Salida");
+                    response.body.should.have.property('operacion').eq("Aki");
                 done();
                 });
         });
@@ -296,7 +296,7 @@ describe('Test API', () => {
             chai.request(server.app)
                 .get("/api/notificaciones")
                 .end((err, response) => {
-                    response.should.have.status(500);
+                    response.should.have.status(200);
     
                 done();
                 });

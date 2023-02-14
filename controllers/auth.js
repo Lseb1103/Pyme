@@ -73,8 +73,28 @@ const logout = async(req, res = response) => {
 
 };
 
+const changePassword = async(req, res = response) => {
+
+    const { id } = req.params;
+    const { _id,password, ...resto } = req.body;
+
+    if ( password ) {
+        // Encriptar la contraseña
+        const salt = bcryptjs.genSaltSync();
+        resto.password = bcryptjs.hashSync( password, salt );
+    }
+
+    // const usuario = await Usuario.findByIdAndUpdate( id, resto );
+    await Usuario.findByIdAndUpdate( id, resto);
+    const usuarioUpdate = await Usuario.findById(id)
+    // console.log('user update:', usuario) 
+
+    res.json( msg= "Datos actualizados");
+    //res.json(usuarioUpdate)
+}
+
 module.exports = {
     login,
     logout, 
-
+    changePassword
 }
