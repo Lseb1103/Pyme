@@ -27,12 +27,8 @@ const usuariosGet = async(req = request, res = response) => {
 
 const usuariosPost = async(req, res = response) => {
     
-    const { nombre, apellido, correo, password, rol, celular } = req.body;
-    const usuario = new Usuario({ nombre,apellido, correo, password, rol, celular });
-    const errors = validations.validate(req);
-    //validar campos
-    if (errors) {
-    return res.status(406).send(errors)}
+    const { nombre, apellido, correo, password, rol, celular, edad, genero } = req.body;
+    const usuario = new Usuario({ nombre,apellido, correo, password, rol, celular, edad, genero });
     
     // Encriptar la contraseña
     const salt = bcryptjs.genSaltSync();
