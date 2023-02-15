@@ -24,7 +24,7 @@ router.get('/',[
 
 router.post('/',[
     validarJWT,
-    tieneRole('ADMIN_ROLE','USER_BRANCH_ROLE'),
+    tieneRole('ADMIN_ROLE','USER_BRANCH_ROLE','USER_ROLE'),
 ], crearNotificacion );
 
 router.put("/:id",actualizarNotificacion );

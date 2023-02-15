@@ -21,6 +21,8 @@ let listar = (req, res) => {
        });
 }
 */
+// se generan todos los productos y nose actualizan
+
 const reporteGeneral = async (req, res = response) => {
 
     //consultar stock
