@@ -2,11 +2,11 @@ const { response } = require('express');
 //const { read, dash } = require('pdfkit');
 const { Producto, Orden, Stock, Usuario } = require('../models');
 const usuario = require('../models/usuario');
-console.log('order')
+//console.log('order')
 
 
 const crearOrden = async (req, res = response) =>{
-    console.log( 'crearOrden')
+    //console.log( 'crearOrden')
 
     const {operacion, usuario, ...data } = req.body;
     
@@ -26,7 +26,7 @@ const crearOrden = async (req, res = response) =>{
     //console.log('cantidad: ', data.cantidad)
 
     if(operacion === "Ingreso") {
-        console.log(operacion)
+        //console.log(operacion)
         producto.cantidad += valor,
         await producto.save();
 
