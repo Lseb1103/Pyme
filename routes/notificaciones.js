@@ -18,12 +18,12 @@ const { crearNotificacion,
 const router = Router();
 
 router.get('/',[
-    //validarJWT,
+    validarJWT,
     tieneRole('ADMIN_ROLE','USER_ROLE', 'USER_BRANCH_ROLE')
 ], obtenerNotificacion );
 
 router.post('/',[
-    //validarJWT,
+    validarJWT,
     tieneRole('ADMIN_ROLE','USER_BRANCH_ROLE'),
 ], crearNotificacion );
 
