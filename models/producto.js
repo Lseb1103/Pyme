@@ -26,7 +26,11 @@ const ProductoSchema = Schema({
         ref: 'Categoria',
         required: true
     },
-    
+    cantidad: {
+        type: Number,
+        
+        default: 0
+    },
     descripcion: { type: String },
     disponible: { type: Boolean, defult: true },
     img: { type: String },
