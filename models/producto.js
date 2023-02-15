@@ -28,7 +28,7 @@ const ProductoSchema = Schema({
     },
     cantidad: {
         type: Number,
-        
+        required: false,
         default: 0
     },
     descripcion: { type: String },

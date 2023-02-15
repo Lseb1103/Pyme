@@ -82,9 +82,8 @@ const actualizarProducto = async( req, res = response ) => {
     const producto = await Producto.findByIdAndUpdate(id, data, { new: true });
 //
     const stock = await Stock.findByIdAndUpdate(id, data, { new: true }); 
-    
-    await stock.save();
-    res.json( producto );
+
+    res.json( smg = "El producto ha sido actualizado" );
     
     //res.json( stock );
 
