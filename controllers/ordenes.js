@@ -26,7 +26,7 @@ const crearOrden = async (req, res = response) =>{
     //console.log('cantidad: ', data.cantidad)
 
     if(operacion === "Ingreso") {
-        //console.log(operacion)
+        console.log(operacion)
         producto.cantidad += valor,
         await producto.save();
 
@@ -80,7 +80,7 @@ const crearOrden = async (req, res = response) =>{
 
         const orden = new Orden(document)
         await orden.save()
-        res.status(201).json(orden)
+        res.status(201).json( smg ="La operacion se a realizazdo con exito" )
          }
     
     } 
@@ -117,9 +117,10 @@ const obtenerOrdenesSalida = async(req, res = response ) => {
             // .skip( Number( desde ) )
             // .limit(Number( limite ))
     ]);
-    res.status(201).json(
-        smg = " La operacion se ha realizado exitosamente" 
-    )
+    res.status(201).json({
+        total,
+        ordenes
+    })
 
 }
 
