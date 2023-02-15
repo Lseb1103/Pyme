@@ -118,7 +118,7 @@ const obtenerOrdenesSalida = async(req, res = response ) => {
             // .limit(Number( limite ))
     ]);
     res.status(201).json(
-        smg = "El producto ha sido actualizado" 
+        smg = " La operacion se ha realizado exitosamente" 
     )
 
 }
