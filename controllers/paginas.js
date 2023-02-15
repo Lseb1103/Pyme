@@ -60,7 +60,7 @@ const [ total, paginas ] = await Promise.all([
 
     const { id } = req.params;
     const paginaBorrada = await Pagina.findByIdAndDelete(id);
-    res.json({ paginaBorrada });
+    res.json( smg = "El pagina se ha desabilitado " );
 
 };
 
