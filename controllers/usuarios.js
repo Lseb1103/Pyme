@@ -87,7 +87,7 @@ const usuariosDelete = async(req, res = response) => {
     //res.json(usuario,usuarioAutenticado);
     // res.status(usuario).json(usuarioAutenticado);
     res.status(217).json(
-        smg = "El usuario ha sido eliminado ");
+        smg = "El usuario ha sido deshabilitado");
 }
 
 
