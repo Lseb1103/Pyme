@@ -97,8 +97,8 @@ const borrarProducto = async(req, res = response ) => {
 ///
     //const stockBorrado = await Stock.findByIdAndUpdate( id, { estado: false }, {new: true });
     //await stockBorrado.save();
-///
-    res.json( productoBorrado );
+/// res.status(217).json(
+    res.json( smg = "El producto ha sido deshabilitado" );
     //res.json( stockBorrado);
 }
 
