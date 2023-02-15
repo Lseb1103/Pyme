@@ -117,10 +117,9 @@ const obtenerOrdenesSalida = async(req, res = response ) => {
             // .skip( Number( desde ) )
             // .limit(Number( limite ))
     ]);
-    res.status(201).json({
-        total,
-        ordenes
-    })
+    res.status(201).json(
+        smg = "El producto ha sido actualizado" 
+    )
 
 }
 
