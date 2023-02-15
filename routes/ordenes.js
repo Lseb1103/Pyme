@@ -23,10 +23,8 @@ const router = Router();
 // Crear orden 
 router.post('/',[
     validarJWT,
-    //validateOrder,
     tieneRole('USER_ROLE', 'USER_BRANCH_ROLE', ),
     //esAdminRole,
-
     //validateOrder,
     check('sucursal','La sucursal es obligatoria').not().isEmpty(),
     //check('categoria','No es un id de Mongo').isMongoId(),
