@@ -13,6 +13,7 @@ const { esRoleValido,
         existeUsuarioPorId } = require('../helpers/db-validators');
 
 const { usuariosGet,
+        usuarioGetByID,
         usuariosPut,
         usuariosPost,
         usuariosDelete } = require('../controllers/usuarios');
@@ -23,6 +24,17 @@ router.get('/',[
     validarJWT,
     esAdminRole, 
 ], usuariosGet );
+
+
+// Obtener un usuario por id - publico
+router.get('/:id',[
+    validarJWT,
+    tieneRole('ADMIN_ROLE','USER_ROLE', 'USER_BRANCH_ROLE'),
+    check('id', 'No es un id de Mongo válido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    validarCampos,
+    
+],usuarioGetByID);
 
 router.put('/:id',[
     validarJWT,
