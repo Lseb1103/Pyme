@@ -1,1 +1,1 @@
-Recuerden que deben de ejecutar ```npm install``` para reconstruir los módulos de Node.
+# Documentos que validan el desarrollo del trabajo de integración curricular.
