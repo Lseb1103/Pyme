@@ -5,7 +5,7 @@ const { Producto,Stock } = require('../models');
 
 const obtenerProductos = async(req, res = response ) => {
 
-    const { limite = 5, desde = 0 } = req.query;
+    const { limite = 2, desde = 1 } = req.query;
     const query = { estado: true };
 
     const [ total, productos ] = await Promise.all([

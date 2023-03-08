@@ -31,7 +31,7 @@ router.put("/:id",actualizarNotificacion );
 
 router.delete('/:id',borrarNotificacion);
 
-router.patch('/',[
+router.get('/para/:id',[
     //validarJWT,
 ], filtroNoti)
 

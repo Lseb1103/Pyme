@@ -32,7 +32,7 @@ const NotiSchema = Schema({
         required: true
     },
      
-});
+},{timestamps: true});
 
 
 module.exports = model('Notificacion', NotiSchema);

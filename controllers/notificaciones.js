@@ -73,9 +73,9 @@ const borrarNotificacion = async(req, res = response ) => {
 
 const filtroNoti = async(req, res = response ) => {
     //const cat ={ msg : 'hi'}
-    const { para } = req.params;
-    const fNoti = await Notificacion.find({notificacion: { $eq: para}})
-                                   //.populate('usuario', 'nombre')
+    const { id } = req.params;
+    const fNoti = await Notificacion.find({para: { $eq: id}})
+                                   .populate('usuario', 'nombre')
                                    //.populate('categoria', 'nombre');
                                    console.log (fNoti)
     res.json( fNoti );
