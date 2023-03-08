@@ -4,11 +4,10 @@ const { check } = require('express-validator');
 
 const { validarJWT, validarCampos, esAdminRole,tieneRole } = require('../middlewares');
 
-const { obtenerResumenProducto,
-    obtenerunprodespecifico
- } = require('../controllers/stock');
 
 const { existeProductoPorId } = require('../helpers/db-validators');
+const { obtenerProducto,
+        obtenerProductos } = require('../controllers/productos');
 
 const router = Router();
 
@@ -17,7 +16,7 @@ const router = Router();
  */
 
 //  Obtener todas el stock - publico
-router.get('/', obtenerResumenProducto );
+router.get('/', obtenerProductos );
 
 // Obtener un producto por id - publico
 router.get('/:id',[
@@ -25,7 +24,7 @@ router.get('/:id',[
     check('id').custom( existeProductoPorId ),
     validarCampos,
 
-], obtenerunprodespecifico );
+], obtenerProducto);
 
 
 module.exports = router;

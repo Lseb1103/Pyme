@@ -32,7 +32,7 @@ router.put("/:id",actualizarNotificacion );
 router.delete('/:id',borrarNotificacion);
 
 router.patch('/',[
-    validarJWT,
+    //validarJWT,
 ], filtroNoti)
 
 module.exports = router;

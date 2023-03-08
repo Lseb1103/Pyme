@@ -39,7 +39,7 @@ const crearProducto = async(req, res = response ) => {
     const { estado, usuario, ...body } = req.body;
 
     const productoDB = await Producto.findOne({ nombre: body.nombre.toUpperCase()})
-    console.log('hii',productoDB)
+    //console.log('hii',productoDB)
     if ( productoDB ) {
         return res.status(400).json({
             msg: `El producto ${ productoDB.nombre }, ya existe`
@@ -62,8 +62,8 @@ const crearProducto = async(req, res = response ) => {
     //generar datos de la tabla stok
     //guardar en la collecccion stok
     
-    const stock = new Stock(data);
-    await stock.save();
+    //const stock = new Stock(data);
+    //await stock.save();
     //res.status(201).json(stock);
 
 }

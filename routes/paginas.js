@@ -29,14 +29,14 @@ router.post("/paginas",[
     
 router.get('/',[
     validarJWT, 
-    esAdminRole
+    //esAdminRole
 ], getAllPages);
 
 // Obtener una pagina por id - publico
 
 router.get('/:id',[
     validarJWT,
-    esAdminRole,
+    //esAdminRole,
     check('id', 'No es un id de Mongo válido').isMongoId(),
     check('id').custom(existePaginaPorId),
     validarCampos

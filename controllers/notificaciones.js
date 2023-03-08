@@ -30,7 +30,7 @@ const obtenerNotificacion = async(req, res = response ) => {
         Notificacion.find(query)
             .populate('usuario', 'nombre')
             //.populate('usuario','rol' )
-            .populate('para')
+            //.populate('para','nombre')
             // .skip( Number( desde ) )
             // .limit(Number( limite ))
     ]);
@@ -78,12 +78,23 @@ const filtroNoti = async(req, res = response ) => {
     //const cat ={ msg : 'hi'}
     const { para } = req.query;
     const fNoti = await Notificacion.find({notificacion: { $eq: para}})
-                                   .populate('usuario', 'nombre')
+                                   //.populate('usuario', 'nombre')
+                                   //.populate('categoria', 'nombre');
+                                   console.log (fNoti)
+    res.json( fNoti );
+}
+/*
+const filtroNoti = async(req, res = response ) => {
+
+    const { id } = req.params;
+    const fNoti = await Notificacion.findById( id )
+                                   //.populate('usuario', 'nombre')
                                    //.populate('categoria', 'nombre');
 
     res.json( fNoti );
-
+console.log (fNoti)
 }
+*/
 
 module.exports = {
     obtenerNotificacion,
