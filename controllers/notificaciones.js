@@ -29,10 +29,7 @@ const obtenerNotificacion = async(req, res = response ) => {
         Notificacion.countDocuments(query),
         Notificacion.find(query)
             .populate('usuario', 'nombre')
-            //.populate('usuario','rol' )
-            //.populate('para','nombre')
-            // .skip( Number( desde ) )
-            // .limit(Number( limite ))
+
     ]);
     res.status(201).json({
         total,
@@ -76,7 +73,7 @@ const borrarNotificacion = async(req, res = response ) => {
 
 const filtroNoti = async(req, res = response ) => {
     //const cat ={ msg : 'hi'}
-    const { para } = req.query;
+    const { para } = req.params;
     const fNoti = await Notificacion.find({notificacion: { $eq: para}})
                                    //.populate('usuario', 'nombre')
                                    //.populate('categoria', 'nombre');
